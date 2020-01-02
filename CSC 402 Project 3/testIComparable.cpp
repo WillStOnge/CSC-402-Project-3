@@ -1,9 +1,8 @@
 /*
 File Name: testIComparable.cpp
-Author: Dr. Aziz 
-Course/Project: CSC 402/502, Project3
-Purpose:  Test driver for Integer objects.
-          You must provide the test cases as needed for Double and Character objects.
+Author: Will St. Onge
+Course: CSC 402
+Date: 1/2/20
 */
 
 #pragma warning(disable: 26451)
@@ -60,30 +59,39 @@ int main()
     (i2 == i3) ? cout << "i2 == i3" << endl : cout << "ERROR: i2 == i3 should be true" << endl;
     (i2 >= i1) ? cout << "i2 >= i1" << endl : cout << "ERROR: i2 >= i1 should be true" << endl;
     (i3 >= i3) ? cout << "i3 >= i3" << endl : cout << "ERROR: i3 >= i3 should be true" << endl;
-    (i4 == i3) ? cout << "i4 == i3" << endl : cout << "ERROR: i4 == i3 should be true" << endl;
+    (i4 == i3) ? cout << "i4 == i3" << endl : cout << "ERROR: i4 == i3 should be true" << endl << endl;
 
-    cout << endl;
-
-	// TODO:  Implement the same kind of test cases for individual 
-    //   stack-allocated Doubles and Characters
-   // You do not have to cover every function, but include multiple types of 
-   // constructors, a sampling of the relational operators, and operator<<
+	// Test cases for Double
   
+	cout << endl << "Stack-based Double constructors, operator=, and << tests:" << endl << SEPARATOR << endl;
 
+	Double d1, d2(2.4), d3 = d2, d4;
+	d4 = d3;
 
+	cout << "d1 = " << d1 << "\nd2 = " << d2 << "\nd3 = " << d3 << "\nd4 = " << d4 << endl;
 
+	cout << endl << "Stack-based Double relational operator tests:" << endl << SEPARATOR << endl;
+	(d2 > d1) ? cout << "d2 > d1" << endl : cout << "ERROR: d2 > d1 should be true" << endl;
+	(d2 == d3) ? cout << "d2 == d3" << endl : cout << "ERROR: d2 == d3 should be true" << endl;
+	(d2 >= d1) ? cout << "d2 >= d1" << endl : cout << "ERROR: d2 >= d1 should be true" << endl;
+	(d3 >= d3) ? cout << "d3 >= d3" << endl : cout << "ERROR: d3 >= d3 should be true" << endl;
+	(d4 == d3) ? cout << "d4 == d3" << endl : cout << "ERROR: d4 == d3 should be true" << endl << endl;
 
+	// Test cases for Character
 
+	cout << endl << "Stack-based Character constructors, operator=, and << tests:" << endl << SEPARATOR << endl;
 
+	Character c1, c2('Z'), c3 = c2, c4;
+	c4 = c3;
 
+	cout << "c1 = " << c1 << "\nc2 = " << c2 << "\nc3 = " << c3 << "\nc4 = " << c4 << endl;
 
-
-
-
-
-
-
-
+	cout << endl << "Stack-based Character relational operator tests:" << endl << SEPARATOR << endl;
+	(c2 > c1) ? cout << "c2 > c1" << endl : cout << "ERROR: c2 > c1 should be true" << endl;
+	(c2 == c3) ? cout << "c2 == c3" << endl : cout << "ERROR: c2 == c3 should be true" << endl;
+	(c2 >= c1) ? cout << "c2 >= c1" << endl : cout << "ERROR: c2 >= c1 should be true" << endl;
+	(c3 >= c3) ? cout << "c3 >= c3" << endl : cout << "ERROR: c3 >= c3 should be true" << endl;
+	(c4 == c3) ? cout << "c4 == c3" << endl : cout << "ERROR: c4 == c3 should be true" << endl << endl;
 
     // To support runtime polyporphism, we need to be able to handle IComparable pointers
     //   in addition to stack-allocated instances of IComparable derived classes
@@ -113,29 +121,51 @@ int main()
     (*ip1 == *ip2) ? cout << "*ip1 == *ip2" << endl : cout << "ERROR: *ip1 == *ip2 should be true" << endl;
     cout << endl;
 
+	// Test cases for Double
 
+	cout << endl << "Double test cases using IComparable pointers" << endl << SEPARATOR << endl;
+	IComparable* dp1 = new Double;      // default constructor
+	IComparable* dp2 = new Double(2.4);
+	cout << "*dp1 = " << *dp1 << endl;
+	cout << "*dp2 = " << *dp2 << endl;
+	(*dp1 < *dp2) ? cout << "*dp1 < *dp2" << endl : cout << "ERROR: *dp1 < *dp2 should be true" << endl;
 
-    // TODO:  Implement the same kind of test cases for individual IComparable pointers initialized as 
-    //   heap-allocated Doubles and Characters
-	// You do not have to cover every function, but include multiple types of 
-	// constructors, a sampling of the relational operators, and operator<<
+	cout << endl << "Double copy construction using IComparable pointers" << endl << SEPARATOR << endl;
+	IComparable* dp3 = new Double(2.4);
+	IComparable* dp4 = new Double(*dp3);
+	cout << "*dp3 = " << *dp3 << endl;
+	cout << "*dp4 = " << *dp4 << endl;
+	(*dp3 == *dp4) ? cout << "*dp3 == *dp4" << endl : cout << "ERROR: *dp3 == *dp4 should be true" << endl;
+	cout << endl;
 
+	cout << endl << "Double copy assignment operators using IComparable pointers" << endl << SEPARATOR << endl;
+	*dp2 = *dp1;
+	cout << "*dp1 = " << *dp1 << endl;
+	cout << "*dp2 = " << *dp2 << " after copy assignment " << endl;
+	(*dp1 == *dp2) ? cout << "*dp1 == *dp2" << endl : cout << "ERROR: *dp1 == *dp2 should be true" << endl << endl;
 
+	// Test cases for Character
 
+	cout << endl << "Character test cases using IComparable pointers" << endl << SEPARATOR << endl;
+	IComparable* cp1 = new Character;      // default constructor
+	IComparable* cp2 = new Character('Z');
+	cout << "*cp1 = " << *cp1 << endl;
+	cout << "*cp2 = " << *cp2 << endl;
+	(*cp1 < *cp2) ? cout << "*cp1 < *cp2" << endl : cout << "ERROR: *cp1 < *cp2 should be true" << endl;
 
+	cout << endl << "Character copy construction using IComparable pointers" << endl << SEPARATOR << endl;
+	IComparable* cp3 = new Character('Z');
+	IComparable* cp4 = new Character(*cp3);
+	cout << "*cp3 = " << *cp3 << endl;
+	cout << "*cp4 = " << *cp4 << endl;
+	(*cp3 == *cp4) ? cout << "*cp3 == *cp4" << endl : cout << "ERROR: *cp3 == *cp4 should be true" << endl;
+	cout << endl;
 
-
-
-
-
-
-
-
-
-
-
-
-
+	cout << endl << "Character copy assignment operators using IComparable pointers" << endl << SEPARATOR << endl;
+	*cp2 = *cp1;
+	cout << "*cp1 = " << *cp1 << endl;
+	cout << "*cp2 = " << *cp2 << " after copy assignment " << endl;
+	(*cp1 == *cp2) ? cout << "*cp1 == *cp2" << endl : cout << "ERROR: *cp1 == *cp2 should be true" << endl << endl;
 
 	//TEST CASES FOR ALL THREE VARIATIONS OF VECTORS OF ICOMPARABLE POINTERS PROVIDED
     // You just need to get them to run... and they should if the heap-based objects
@@ -199,20 +229,16 @@ int main()
 	cout << "isSorted(charVector): " << isSorted(charVector) << endl;
 	cout << endl;
 
-
-
-
-    // to avoid memory leaks, delete any of your individual Integer*, Character*, and Double* objects
     delete ip1, ip2, ip3, ip4;
+    delete cp1, cp2, cp3, cp4;
+    delete dp1, dp2, dp3, dp4;
 
-    // Do a similar cleanup for any vector<Icomparable*> data structures you might have created
-	// Note that it's not as simple as delete[] with a primitive array! 
     for (unsigned int i = 0; i < SIZE; i++) {
         delete intVector[i];
-
+		delete doubleVector[i];
+		delete charVector[i];
     }
 
-    cin.get();
     return 0;
 
 }
